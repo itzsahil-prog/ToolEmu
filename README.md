@@ -6,8 +6,8 @@
 
 
 <div align="center" style="font-size: 28px;">
-    [<a href="https://arxiv.org/abs/2309.15817">📃 Paper</a> &nbsp;&nbsp;&nbsp;]
-    [<a href="https://demo.toolemu.com">🎮 Demo</a> &nbsp;&nbsp;&nbsp;]
+    [<a href="https://arxiv.org/abs/2309.15817">📃 Paper</a>] &nbsp;&nbsp;&nbsp;
+    [<a href="https://demo">🎮 Demo</a>] &nbsp;&nbsp;&nbsp;
 </div>
 
 <br>
