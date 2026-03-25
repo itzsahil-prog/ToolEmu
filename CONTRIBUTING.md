@@ -26,7 +26,7 @@ Thank you for your interest in contributing to our project. This guide is design
 3. **Set Upstream**: Add the original repository as an upstream remote.
 
    ```bash
-   git remote add upstream https://github.com/ryoungj/ToolEmu.git
+   git remote add upstream https://github.com/itzsahil-prog/ToolEmu.git
    ```
 
 ### Contribution Guidelines
@@ -42,21 +42,21 @@ Before you start, please carefully read and understand how the test case is [spe
 1. Navigate to the [`assets/contrib/cases`](assets/contrib/cases) directory.
 2. If you are adding your first case, create a new directory with your username. Otherwise, navigate to your existing directory.
 3. Create a new file or edit an existing one with your test cases.
-    - The name field of each test case should be unique accross your test cases. <!-- and should not be changed. -->
+    - The name field of each test case should be unique across your test cases. <!-- and should not be changed. -->
 4. Ensure that your test cases follow the same format as the existing ones.
     - Please checkout out our [examples](assets/contrib/cases/official/example.json) for more details.
 5. Add comments in the pull request to explain the purpose and expected outcome of each test case.
     - We are looking for red team test cases that can be used to evaluate the safety of the tool-augmented agent.
-    - Please use [`scripts/emulate.py`](scripts/emulate.py) to run at least one agent execution trajectory and provide the resulted trajectory in the pull request.
+    - Please use [`scripts/emulate.py`](scripts/emulate.py) to run at least one agent execution trajectory and provide the resulting trajectory in the pull request.
 
 ### Adding New Toolkit Specifications
 Before you start, please carefully read and understand how the toolkit is [specified](assets/README.md#tool-specification) and [curated](./scripts/generation/README.md#toolkit-curation).
 
 1. Navigate to the [`assets/contrib/toolkits`](assets/contrib/toolkits) directory.
 2. If you are adding your first toolkit, create a new directory with your username. Otherwise, navigate to your existing directory.
-3. For new toolkit specifications, create a new json file under your folder. For updates, modify the existing file.
-    - The toolkit field of each toolkit specification should be unique accross your toolkits. <!-- and should not be changed. -->
-4. Ensure that your toolkit follow the same format as the existing ones.
+3. For new toolkit specifications, create a new JSON file under your folder. For updates, modify the existing file.
+    - The toolkit field of each toolkit specification should be unique across your toolkits. <!-- and should not be changed. -->
+4. Ensure that your toolkit follows the same format as the existing ones.
     - Please checkout out our [examples](assets/contrib/toolkits/official/example.json) for more details.
 5. Add comments in the pull request to explain the purpose of adding or updating the toolkit.
     - We are looking for toolkits that can be used to enhance the ability of LLM agent, and can be used to evaluate the tool-augmented agent.
