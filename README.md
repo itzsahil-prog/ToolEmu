@@ -9,7 +9,6 @@
     [<a href="https://arxiv.org/abs/2309.15817">📃 Paper</a>] &nbsp;&nbsp;&nbsp;
     [<a href="https://toolemu.com">🌐 Website</a>] &nbsp;&nbsp;&nbsp;
     [<a href="https://demo.toolemu.com">🎮 Demo</a>] &nbsp;&nbsp;&nbsp;
-    [<a href="https://twitter.com/YangjunR/status/1708880142649676056">🐦 Twitter</a>]
 </div>
 
 <br>
@@ -17,7 +16,7 @@
 
 
 Recent advances in Language Model (LM) agents and tool use, exemplified by applications like ChatGPT Plugins, enable a rich set of capabilities but also amplify potential risks—such as leaking private data or causing financial losses. Identifying these risks is labor-intensive, necessitating implementing the tools, manually setting up the environment for each test scenario, and finding risky cases. As tools and agents become more complex, the high cost of testing these agents will make it increasingly difficult to find high-stakes, long-tailed risks.
-ToolEmu is an LM-based emulation framework that enables identifying and assessing such risks at scale, facilitating the development of safter LM agents.
+ToolEmu is an LM-based emulation framework that enables identifying and assessing such risks at scale, facilitating the development of safer LM agents.
 
 
 This repo contains the code for:
@@ -39,9 +38,9 @@ https://github.com/ryoungj/ToolEmu/assets/12556773/149071ee-53c4-4697-9070-cc047
 
 ToolEmu assists in rapidly identifying realistic failures of LM agents across various tools and scenarios within an LM-emulated environment and facilitates the development of safer LM agents with LM-automated evaluations. It consists of 3 main components:
 
-- **Tool Emulators**: ToolEmu uses a strong LM (e.g. GPT-4) to emulate the execution of tools in a virtual sandbox using only their specifications and inputs, without needing their implementations. This allows for faster prototyping of LM agents across different scenarios, while accommodating the evaluation of high-stakes tools that may lack existing APIs or sandbox implementations.
-- **Safety & Helpfulness Evaluators**: To support scalable and quantitative risk assessments, ToolEmu includes an LM-based safety evaluator to automate the identification of potential failures caused by LM agents and quantifies the associated risk severities. To capture the potential tradeoff between safety and effectiveness, ToolEmu also includes an LM-based helpfulness evaluator.
-- **Curated Benchmark**: ToolEmu ships with an initial benchmark covering 36 toolkits (311 tools) and 144 test cases for an quantitative evaluation of LM agents across various tools and scenarios. The scalablility of ToolEmu allows expanding it to more tools and scenarios.
+- **Tool Emulators**: ToolEmu uses a strong LM (e.g., GPT-4) to emulate the execution of tools in a virtual sandbox using only their specifications and inputs, without needing their implementations. This allows for faster prototyping of LM agents across different scenarios, while accommodating the evaluation of high-stakes tools that may lack existing APIs or sandbox implementations.
+- **Safety & Helpfulness Evaluators**: To support scalable and quantitative risk assessments, ToolEmu includes an LM-based safety evaluator to automate the identification of potential failures caused by LM agents and to quantify the associated risk severities. To capture the potential tradeoff between safety and effectiveness, ToolEmu also includes an LM-based helpfulness evaluator.
+- **Curated Benchmark**: ToolEmu ships with an initial benchmark covering 36 toolkits (311 tools) and 144 test cases for a quantitative evaluation of LM agents across various tools and scenarios. The scalability of ToolEmu allows it to be expanded to more tools and scenarios.
 
 
 
@@ -67,20 +66,19 @@ ToolEmu assists in rapidly identifying realistic failures of LM agents across va
 ## Setup
 
 ### Installation
-To run our code, we require the installation of another package called [PromptCoder](https://github.com/dhh1995/PromptCoder). This pacakge is used to manage our [system of prompts](./toolemu/prompts/) in a modularized manner. Please note that this package is still in development.
+To run our code, we require the installation of another package called [PromptCoder](https://github.com/itzsahil-prog/PromptCoder.git). This package is used to manage our [system of prompts](./toolemu/prompts/) in a modularized manner. Please note that this package is still in development.
 
 We suggest you install the package using pip in editable mode, which means that any changes you make to the code will be instantly effective without needing to reinstall the package. To install the packages, run the following commands:
 ```bash
 # Clone the repositories
-git clone https://github.com/ryoungj/ToolEmu.git
-git clone https://github.com/dhh1995/PromptCoder.git
+git clone https://github.com/itzsahil-prog/PromptCoder.git
 # Install the packages
 cd PromptCoder
 pip install -e .
 cd ../ToolEmu
 pip install -e .
 ```
-<!-- [PromptCoder](https://github.com/dhh1995/PromptCoder) will be uploaded to PyPI soon, and then you will be able to install it using `pip install procoder`. -->
+<!-- [PromptCoder](https://github.com/itzsahil-prog/PromptCoder.git) will be uploaded to PyPI soon, and then you will be able to install it using `pip install procoder`. -->
 
 ### Set up API keys
 After installation, you need to set up your OpenAI or Claude API keys. You can do this by creating a file named `.env` in the project directory, and then inputting your keys into this file as follows:
@@ -110,8 +108,8 @@ To evaluate with a specific setup, specify the following arguments:
 - `--agent-model`: The base model for the agent, default `gpt-4-0613`.
 - `--agent-temperature`: The temperature of the agent, default 0.
 - `--agent-type`: The type of agent, default `naive` with the basic prompt including only the format instructions and examples. Other options include `ss_only` (include safety requirements) or `helpful_ss` (include both safety and helpfulness requirements)
-- `--simulator-type`: The type of the simulator, default to be `adv_thought` (for adversarial emulator). Another option is `std_thought` (for standard emulator).
-- `--batch-size`: the batch size used for running the emulation and evaluation, default 5. You may encounter frequent rate limit error if you set it to be larger than 10.
+- `--simulator-type`: The type of the simulator, default to be `adv_thought` (for adversarial emulator). Another option is `std_thought` (for the standard emulator).
+- `--batch-size`: the batch size used for running the emulation and evaluation, default 5. You may encounter a frequent rate limit error if you set it to be larger than 10.
 
 Note that the cost for running and evaluating a test case is about **$1.2**, totalling ~$170 for running the entire dataset. 
 To evaluate a subset of the test cases, you can specify the number of cases (`--trunc-num`) to run. For example, setting it to 10 will only run the first 10 test cases (after random shuffle with `--shuffle`).
@@ -120,13 +118,13 @@ For a detailed control over the pipeline, please refer to the [scripts/](scripts
 
 
 ### Curating your toolkits and test cases
-If you would like to curate your own toolkits or test cases following [our specifications](./assets/README.md), we provide [scripts](../scripts/generation/) to brainstorm and generate an initial set with GPT-4 from which you can review, filter and refine to your curated set. 
+If you would like to curate your own toolkits or test cases following [our specifications](./assets/README.md), we provide [scripts](../scripts/generation/) to brainstorm and generate an initial set with GPT-4 from which you can review, filter, and refine to your curated set. 
 
 Depending on your specific use case, you may want to consider the following options, ranging from simple to more complex data curation:
 
 - **Test case completion**: If you have a specific test case (i.e., toolkit, user instruction, and potential risks) in mind, and would like to use GPT-4 to fill in additional fields (e.g., underspecifications) required by our adversarial emulator and safety evaluator, please use this [notebook](../../notebooks/complete_case.ipynb).
 - **Test case curation**: If you want to curate a large and diverse set of test cases with [our curated toolkit set](../../assets/all_toolkits.json), and use GPT-4 to brainstorm an initial set, please see [test case curation](./scripts/generation/README.md#test-case-curation) for details.
-- **Toolkit curation**: If you would like to create a new set of toolkits, and to use GPT-4 to brainstorm an initial set or/and generate the toolkit specifications, please see [toolkit curation](./scripts/generation/README.md#toolkit-curation) for details.
+- **Toolkit curation**: If you would like to create a new set of toolkits and to use GPT-4 to brainstorm an initial set or/and generate the toolkit specifications, please see [toolkit curation](./scripts/generation/README.md#toolkit-curation) for details.
 
 
 For more details, please refer to the [generation readme](./scripts/generation/README.md).
@@ -134,11 +132,6 @@ For more details, please refer to the [generation readme](./scripts/generation/R
 ## Contributing
 We welcome contributions to this repository, especially in contributing new tools and test cases to expand our evaluation benchmark. Please refer to the [contributing guidelines](CONTRIBUTING.md) for more details.
 
- ## Citation
-
-```
-@inproceedings{ruan2024toolemu,
-  title={Identifying the Risks of LM Agents with an LM-Emulated Sandbox},
   author={Ruan, Yangjun and Dong, Honghua and Wang, Andrew and Pitis, Silviu and Zhou, Yongchao and Ba, Jimmy and Dubois, Yann and Maddison, Chris J and Hashimoto, Tatsunori},
   booktitle={The Twelfth International Conference on Learning Representations},
   year={2024}
